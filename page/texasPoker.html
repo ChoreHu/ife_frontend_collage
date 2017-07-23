@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+        </style>
+    </head>
+    <body>
+        <script>
+            function Player(){
+                //玩家数
+                var players = 2;
+
+                //玩家类型1为玩家,0为电脑
+                var playersType = [1, 0];
+            }
+            function Poker(){
+
+            }
+            function Viewer(){
+
+            }
+            Viewer.prototype = {
+                createStartViewer : function(){
+                    var oDiv = document.createElement("div");
+                    var createHumanBtn = document.createElement("button");
+                    createHumanBtn.innerText = "创建人类玩家";
+                    createHumanBtn.addEventListener("click", () => this.clickCreateBtn(1) , false);
+                    var createComputerBtn = document.createElement("button");
+                    createComputerBtn.innerText = "创建电脑玩家";
+                    createComputerBtn.addEventListener("click", () => this.clickCreateBtn(0), false);
+                    var startBtn = document.createElement("button");
+                    startBtn.setAttribute("disabled", "disabled");
+                    startBtn.setAttribute("id", "startBtn");
+                    startBtn.innerText = "开始游戏";
+                    startBtn.addEventListener("click", () => this.startGame(), false);
+                    oDiv.appendChild(createHumanBtn);
+                    oDiv.appendChild(createComputerBtn);
+                    oDiv.appendChild(startBtn)
+                    document.body.appendChild(oDiv);
+                },
+                clickCreateBtn : function(playerType){
+                    var playersList = document.getElementById("playersList")
+                    if(!playersList){
+                        var playersList = document.createElement("ul");
+                        playersList.id = "playersList";
+                    }
+                    var oLi = document.createElement("li");
+                    if(playerType){
+                        oLi.innerText = "humen"
+                        oLi.className = "humen"
+                    }else{
+                        oLi.innerText = "computer"
+                        oLi.className = "computer"
+                    }
+                    playersList.appendChild(oLi);
+                    document.body.appendChild(playersList);
+                    this.readyStart(true);
+                },
+                readyStart : function(type){
+                    if(type){
+                        startBtn.removeAttribute("disabled");
+                    }else{
+                        startBtn.setAttribute("disabled", "disabled");
+                    }
+                },
+                startGame : function(){
+                    var playersList = document.getElementById("playersList")
+                    var players = playersList.getElementsByTagName("li");
+                    playersType = []
+                    for(let i = 0;i < players.length;i++){
+                        playersType.push(players[i].className === "humen" ? 1 : 0);
+                    }
+                }
+            }
+            Player.prototype = {
+                createPlayer : function(){
+
+                }
+            }
+            var startViewer = new Viewer();
+            startViewer.createStartViewer();
+        </script>
+    </body>
+</html>

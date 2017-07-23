@@ -2,7 +2,7 @@
 * @Author: hupiao
 * @Date:   2017-07-23 20:51:41
 * @Last Modified by:   hupiao
-* @Last Modified time: 2017-07-24 01:16:52
+* @Last Modified time: 2017-07-24 02:04:55
 */
 
 'use strict';
@@ -124,7 +124,6 @@
             //成功Div 无
             this.showMessage(parentNode, "validate-success");
         },
-
         /**
          * 错误验证之后的处理
          * @param {Object} parentNode  父元素节点
