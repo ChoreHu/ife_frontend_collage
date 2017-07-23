@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .validate-success{
+                color : green;
+            }
+            .validate-error{
+                color : red;
+            }
+            .success-input{
+                border: 1px solid green;
+            }
+            .error-input{
+                border: 1px solid red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="formDiv">
+            <div>
+                <label for="name">名称</label> <input id="name" validate-type="userNameRegex" valite-require="true"/>
+            </div>
+            <div>
+                <label for="pw">密码</label> <input type="password" id="pw" validate-type="pwdRegex" valite-require="true"/>
+            </div>
+            <div>
+                <label for="email">邮箱</label> <input type="email" id="email" validate-type="emailRegex" valite-require="true"/>
+            </div>
+            <div>
+                <label for="phone">手机</label> <input type="text" id="phone" validate-type="mobileRegex" valite-require="true"/>
+            </div>
+            <div id="submitDiv">
+                <button id="registerBtn">验证</button>
+            </div>
+        </div>
+    </body>
+    <script src="js/mission2.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        window.Validate()
+    </script>
+</html>
