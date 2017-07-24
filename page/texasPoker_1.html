@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .hidden{
+                display: none;
+            }
+            .visiable{
+                display: block;
+            }
+            .poker{
+                font-size: 24px;
+                box-sizing: border-box;
+                display: inline-block;
+                height: 3.5em;
+                width: 2.5em;
+                padding: .3em 0;
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="playBox" class="hidden">
+            <input type="button" value="发牌" id="sendCardBtn">
+            <input type="button" value="开牌">
+            <input type="button" value="弃牌">
+        </div>
+        <script>
+            var playBox = document.getElementById("playBox");
+            function Player(){
+                //玩家数
+                var players = 2;
+
+                //玩家类型1为玩家,0为电脑
+                var playersType = [1, 0];
+            }
+            /**
+             *  值: 0/2, 1/3, ... 8/10, 9/J, 10/Q, 11/K, 12/A
+             *  花: 0/(R♠), 1/(B♠), 2/♣, 3/♦
+             */
+            function Poker(){
+                //扑克的取值
+                this.POKERS_VALUES_COUNT = 13;
+                this.DEFAULT_POKERS_TOTAL = 52;
+                //扑克的总数量
+                this.pokers = this.DEFAULT_POKERS_TOTAL;
+                //扑克的数值库
+                this.valueArr = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+                //扑克花色的数据库
+                this.colorArr = ["♠", "♥", "♣", "♦"];
+                this.pokerArr = [];
+            }
+            function Viewer(){
+
+            }
+            Poker.prototype = {
+                createPokers : function(){
+                    poker.pokerArr = [];
+                    for(var i = 0;i < this.DEFAULT_POKERS_TOTAL;i++){
+                        poker.pokerArr.push(i);
+                    }
+                    return this.shuffleCard(poker.pokerArr);
+                },
+                shuffleCard : function(_pokerArr){
+                    return _pokerArr.sort(function() {
+                        return (0.5 - Math.random());
+                    });
+                },
+                getCard : function(card){
+                    console.log(card)
+                    var color = Math.floor((card) / this.POKERS_VALUES_COUNT);
+                    var value = card % this.POKERS_VALUES_COUNT;
+                    var cardInfo = {
+                        "color" : color,
+                        "value" : value
+                    }
+                    return cardInfo;
+                }
+                //1.高牌
+                //2.一对
+                //3.二对
+                //4.三条
+                //5.顺子
+                //6.同花
+                //7.fullhouse
+                //8.四条
+                //9.同花顺
+                //10.皇家同花顺
+            }
+            Player.prototype = {
+                createPlayer : function(playersType){
+                    playersType.forEach(function(elem, index){
+                        var oPlay = document.createElement("div");
+                        var oPlayName = document.createElement("p");
+                        var oCardList = document.createElement("ul");
+                        elem ? oPlay.id = "humanPlayer" : oPlay.id = "computerPlayer";
+                        oPlayName.innerText = "player" + (index + 1);
+                        oCardList.className = "playerCardList";
+                        oPlay.appendChild(oPlayName);
+                        oPlay.appendChild(oCardList);
+                        playBox.appendChild(oPlay);
+                    })
+                }
+            }
+            Viewer.prototype = {
+                createStartViewer : function(){
+                    var startBox = document.createElement("div");
+                    var createHumanBtn = document.createElement("button");
+                    createHumanBtn.innerText = "创建人类玩家";
+                    createHumanBtn.addEventListener("click", () => this.clickCreateBtn(1) , false);
+                    var createComputerBtn = document.createElement("button");
+                    createComputerBtn.innerText = "创建电脑玩家";
+                    createComputerBtn.addEventListener("click", () => this.clickCreateBtn(0), false);
+                    var startBtn = document.createElement("button");
+                    startBox.setAttribute("id", "startBox")
+                    startBtn.setAttribute("disabled", "disabled");
+                    startBtn.setAttribute("id", "startBtn");
+                    startBtn.innerText = "开始游戏";
+                    startBtn.addEventListener("click", () => this.startGame(), false);
+                    startBox.appendChild(createHumanBtn);
+                    startBox.appendChild(createComputerBtn);
+                    startBox.appendChild(startBtn)
+                    document.body.appendChild(startBox);
+                },
+                clickCreateBtn : function(playerType){
+                    var playersList = document.getElementById("playersList");
+                    var startBox = document.getElementById("startBox");
+                    if(!playersList){
+                        var playersList = document.createElement("ul");
+                        playersList.id = "playersList";
+                    }
+                    var oLi = document.createElement("li");
+                    if(playerType){
+                        oLi.innerText = "humen"
+                        oLi.className = "humen"
+                    }else{
+                        oLi.innerText = "computer"
+                        oLi.className = "computer"
+                    }
+                    playersList.appendChild(oLi);
+                    startBox.appendChild(playersList);
+                    this.readyStart(true);
+                },
+                readyStart : function(type){
+                    if(type){
+                        startBtn.removeAttribute("disabled");
+                    }else{
+                        startBtn.setAttribute("disabled", "disabled");
+                    }
+                },
+                startGame : function(){
+                    var playersList = document.getElementById("playersList")
+                    var players = playersList.getElementsByTagName("li");
+                    playersType = []
+                    for(var i = 0;i < players.length;i++){
+                        playersType.push(players[i].className === "humen" ? 1 : 0);
+                    }
+                    document.getElementById("startBox").className = "hidden";
+                    document.getElementById("playBox").className = "visiable";
+                    var sendCardBtn = document.getElementById("sendCardBtn");
+                    sendCardBtn.addEventListener("click", () => this.sendCard(playersType), false)
+                    this.createCommon();
+                    player.createPlayer(playersType);
+                    poker.createPokers();
+                },
+                createCommon : function(){
+                    var commonUl = document.createElement("ul");
+                    commonUl.className = "common";
+                    commonUl.id = "common";
+                    playBox.appendChild(commonUl);
+                },
+                sendCard : function(playersType){
+                    for(var i = 0;i < 2;i++){
+                        playersType.forEach(function(elem, index){
+                            var newPoker = poker.getCard(poker.pokerArr.pop());
+                            var pokerDiv = startViewer.createPoker(newPoker);
+                            var playersList = document.getElementsByClassName("playerCardList");
+                            playersList[index].appendChild(pokerDiv);
+                        })
+                    }
+                    //common
+                    for(var i = 0;i < 5;i++){
+                        var newPoker = poker.getCard(poker.pokerArr.pop());
+                        var pokerDiv = startViewer.createPoker(newPoker);
+                        var common = document.getElementById("common");
+                        common.appendChild(pokerDiv)
+                    }
+                },
+                createPoker : function(newPoker){
+                    var pokerDiv = document.createElement("li");
+                    var colorDiv = document.createElement("div");
+                    var valueDiv = document.createElement("div");
+                    colorDiv.innerText = poker.colorArr[newPoker.color];
+                    valueDiv.innerText = poker.valueArr[newPoker.value];
+                    if(newPoker.color === 1 || newPoker.color === 3){
+                        pokerDiv.style.color = "red"
+                    }
+                    pokerDiv.setAttribute("class", "poker");
+                    pokerDiv.appendChild(colorDiv);
+                    pokerDiv.appendChild(valueDiv);
+                    return pokerDiv;
+                }
+            }
+            var startViewer = new Viewer();
+            var player = new Player();
+            var poker = new Poker();
+            startViewer.createStartViewer();
+        </script>
+    </body>
+</html>
