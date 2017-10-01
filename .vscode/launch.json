@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "本机Chrome调试",
+            "runtimeExecutable": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+            "url": "${file}",
+            "webRoot": "${workspaceRoot}",
+            "sourceMaps": true,
+            "userDataDir":"${tmpdir}",
+            "port":5433
+        }
+    ]
+}
