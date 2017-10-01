@@ -1,0 +1,32 @@
+#game-table{
+    border-collapse:collapse;
+    margin:50px auto 0;
+    width: 450px;
+    position: relative;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box;
+}
+#game-table div{
+    height:50px;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box;
+}
+#game-table div div{
+    height: 50px;
+    width:50px;
+    outline: 1px #ccc solid;
+    display: inline-block;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box;
+}
+#game-table #square{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-top: 10px blue solid;
+    display: inline-block;
+    position: absolute;
+}
