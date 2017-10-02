@@ -1,0 +1,14 @@
+.mask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 透明度 代表透明程度是0-1 1为不透明,0为透明 */
+    background-color: rgba(0,0,0,0.5);
+    /*opacity: 0.5;*/
+}
+.pop{
+    border: 2px solid skyblue;
+    /* 绝对定位 让元素脱离文档流,显示在遮罩的上方 */
+}

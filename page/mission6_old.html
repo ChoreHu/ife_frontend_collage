@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#pop_div{
+				width: 650px;
+				border: 1px solid #676767;
+				overflow: hidden
+			}
+			#pop_div #pop_title{
+				height: 48px;
+				background-color: #858585;
+			}
+			#pop_div #pop_content{
+				height: 272px;
+			}
+			#pop_div #pop_btn{
+				overflow: hidden;
+				float: right;
+				margin: 10px;
+			}
+			#pop_div #pop_enter{
+				margin-right: 20px;
+			}
+			#pop_div #pop_enter,#pop_div #pop_cancle{
+				float: left;
+				border: 1px solid #676767;
+				background-color: #858585;
+				width: 90px;
+				height: 30px;
+				text-align: center;
+				line-height: 30px;
+			}
+		</style>
+        <link rel="stylesheet" href="../css/mission6.css">
+	</head>
+	<body style="height: 2000px;">
+		<input id="loginBtn" type="button" value="登录" />
+		<div id="pop_div">
+			<div id="pop_title">这是title</div>
+			<div id="pop_content">这是正文</div>
+			<div id="pop_btn">
+				<div id="pop_enter">确定</div>
+				<div id="pop_cancle">取消</div>
+			</div>
+		</div>
+		<script src="../js/mission6.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var oLogin = document.getElementById("loginBtn");
+			
+			oLogin.onclick = function(){
+				showPopWindow("800px", "400px", "skyblue", "2px solid black", true, true)
+			}
+		</script>
+	</body>
+</html>
