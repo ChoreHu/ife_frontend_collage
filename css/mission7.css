@@ -1,0 +1,57 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+#cTable {
+    margin: 30px;
+    display: table;
+    border-collapse: collapse;
+    border: 1px solid #D0D0D0;
+}
+
+#cTable ul {
+    display: table-row;
+}
+
+#cTable ul li {
+    width: 120px;
+    height: 40px;
+    text-align: center;
+    border: 1px solid #D0D0D0;
+    line-height: 40px;
+    display: table-cell;
+}
+
+#cTable .head-ul li {
+    background-color: #5C5C5C;
+    color: white;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.caret.active {
+    color: red;
+}
+
+.up-caret {
+    border-top-width: 4px;
+    border-top-style: dashed;
+}
+
+.down-caret {
+    border-bottom-width: 4px;
+    border-bottom-style: dashed;
+}
